@@ -36,21 +36,45 @@ def printGrid(grid, r,c):
                 b += "\n"
     print(b)
 
-
-#hard coded rule 
-ruleMap = ruleMapping(30)
-
+#hard coded rule---------
+rule = 100
+ruleMap = ruleMapping(rule)
+#------------------------
 #hard coded steps (rows) 
-h = 2 
+h = 30
 #columns
-w = 3
+w = ((h * 2)-1)
 #create grid based on above
 ruleGrid = [[0 for x in range(w)] for y in range(h)]
 #step 1
 ruleGrid[0][(math.floor(w/2))] = 1
 
-#preview
-printGrid(ruleGrid,h,w)
 
+#populate matrix
+def populateGrid(grid, r,c):
+    checkCells = ''
+    nextLine = ''
+    for i in range(r - 1):
+        for j in range(c): 
+            if(j == 0):
+                checkCells = "0" + str(grid[i][j]) + str(grid[i][j+1])
+                #print(checkCells)
+            elif(j == (c-1)):
+                checkCells = str(grid[i][j-1]) + str(grid[i][j]) + "0"
+                #print(checkCells)                
+            else:
+                checkCells = str(grid[i][j-1]) + str(grid[i][j]) + str(grid[i][j+1])
+                #print(checkCells)
+            nextLine += str(ruleMap[checkCells])
+        #populate next line
+        for k in range(c):
+            grid[i+1][k] = int(nextLine[k:k+1])
+        nextLine = ""
+    
+    #print preview
+    printGrid(grid,r,c)
+
+#preview
+populateGrid(ruleGrid,h,w)
 
 
