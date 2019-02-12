@@ -37,7 +37,7 @@ def printGrid(grid, r,c):
     print(b)
 
 #hard coded rule---------
-rule = 100
+rule = 60
 ruleMap = ruleMapping(rule)
 #------------------------
 #hard coded steps (rows) 
@@ -75,6 +75,6 @@ def populateGrid(grid, r,c):
     printGrid(grid,r,c)
 
 #preview
-populateGrid(ruleGrid,h,w)
+#populateGrid(ruleGrid,h,w)
 
 
