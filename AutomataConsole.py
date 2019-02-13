@@ -7,7 +7,7 @@ Creates a simple GUI for summing two numbers.
 
 import tkinter
 from tkinter import ttk
-from Automata import binary as automata
+import RuleObject as automata
 
 
 
@@ -26,9 +26,9 @@ class Adder(ttk.Frame):
         self.answer_label['text'] = ''
         """Calculates the sum of the two inputted numbers."""
         rule = int(self.rule_entry.get())
-        automata.populateGrid(automata.ruleGrid, automata.h, automata.w)
-        c = automata.printGrid(automata.ruleGrid, automata.h, automata.w)
-        self.answer_label['text'] = c
+        
+        ruleGen = automata.RuleObject(rule,40)
+        self.answer_label['text'] = ruleGen.printGrid()
 
     def init_gui(self):
         """Builds GUI."""

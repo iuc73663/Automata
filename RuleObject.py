@@ -81,6 +81,6 @@ class RuleObject:
     
    
 #test object 
-sample = RuleObject(60,25)
+#sample = RuleObject(60,25)
 #test print
-print(sample.printGrid())
+#print(sample.printGrid())
