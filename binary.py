@@ -3,6 +3,9 @@
 Created on Fri Feb  8 16:11:07 2019
 
 @author: Administrator
+Keeping this file for testing purposes. 
+Originally created for functionality testing
+Have translated into RuleObject.py
 """
 
 import math
@@ -75,7 +78,9 @@ def populateGrid(grid, r,c):
     printGrid(grid,r,c)
 
 #preview
-populateGrid(ruleGrid,h,w)
-print(printGrid(ruleGrid,h,w))
+#populateGrid(ruleGrid,h,w)
+#print(printGrid(ruleGrid,h,w))
+
+
 
 
