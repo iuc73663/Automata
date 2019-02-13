@@ -23,9 +23,12 @@ class Adder(ttk.Frame):
         quit()
 
     def calculate(self):
+        self.answer_label['text'] = ''
         """Calculates the sum of the two inputted numbers."""
         rule = int(self.rule_entry.get())
-        self.answer_label['text'] = automata.binaryRule(rule)
+        automata.populateGrid(automata.ruleGrid, automata.h, automata.w)
+        c = automata.printGrid(automata.ruleGrid, automata.h, automata.w)
+        self.answer_label['text'] = c
 
     def init_gui(self):
         """Builds GUI."""

@@ -34,7 +34,7 @@ def printGrid(grid, r,c):
             b += " "
             if(j == (c - 1)):
                 b += "\n"
-    print(b)
+    return b
 
 #hard coded rule---------
 rule = 60
@@ -75,6 +75,7 @@ def populateGrid(grid, r,c):
     printGrid(grid,r,c)
 
 #preview
-#populateGrid(ruleGrid,h,w)
+populateGrid(ruleGrid,h,w)
+print(printGrid(ruleGrid,h,w))
 
 
