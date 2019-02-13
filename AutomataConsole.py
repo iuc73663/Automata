@@ -23,11 +23,11 @@ class Adder(ttk.Frame):
         quit()
 
     def calculate(self):
-        self.answer_label['text'] = ''
-        """Calculates the sum of the two inputted numbers."""
-        rule = int(self.rule_entry.get())
         
-        ruleGen = automata.RuleObject(rule,40)
+        rule = int(self.rule_entry.get())
+        steps = int(self.step_entry.get())
+        
+        ruleGen = automata.RuleObject(rule,steps)
         self.answer_label['text'] = ruleGen.printGrid()
 
     def init_gui(self):
@@ -39,11 +39,12 @@ class Adder(ttk.Frame):
 
         self.rule_entry = ttk.Entry(self, width=5)
         self.rule_entry.grid(column=1, row = 2)
+        
+        self.step_entry = ttk.Entry(self, width=5)
+        self.step_entry.grid(column=3, row = 2)
 
 
-
-        self.calc_button = ttk.Button(self, text='Calculate',
-                command=self.calculate)
+        self.calc_button = ttk.Button(self, text='Calculate', command=self.calculate)
         self.calc_button.grid(column=0, row=3, columnspan=4)
 
         self.answer_frame = ttk.LabelFrame(self, text='Output',
@@ -54,9 +55,10 @@ class Adder(ttk.Frame):
         self.answer_label.grid(column=0, row=0)
 
         # Labels that remain constant throughout execution.
-        ttk.Label(self, text='Rule').grid(column=0, row=2,
+        ttk.Label(self, text='Rule').grid(column=0, row=2, sticky='w')
+        
+        ttk.Label(self, text='Steps').grid(column=2, row=2,
                 sticky='w')
-
 
         ttk.Separator(self, orient='horizontal').grid(column=0,
                 row=1, columnspan=4, sticky='ew')
