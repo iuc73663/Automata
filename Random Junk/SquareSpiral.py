@@ -23,7 +23,6 @@ for j in range(360):
     square(20 + i)
     i += 1 
 
+
 done()
 
-
-def
