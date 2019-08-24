@@ -13,7 +13,7 @@ def square(sidelength=100):
 
 
 from turtle import *
-shape('turtle')
+shape("turtle")
 
 speed("normal")
 
