@@ -21,21 +21,36 @@ def triangle(point,sidelength = 50):
 def star(point, sidelength = 50):
     for i in range(5):
         point.forward(sidelength)
-        point.right(145)
-def spiralDriver(shape, point):
-    n = 0
-    for k in range(1,60):        
-        shape(point, n)
-        point.right(5)
-        n += 1       
-    
+        point.right(145)  
+def driver(shape, turt):
+    point = turt 
+    point.color("black") 
+    point.speed("fastest")
+    if(shape == "triangle"):
+        i = 0
+        for j in range(60):
+            point.right(2)
+            triangle(point, 20 + i)
+            i += 1 
+    if(shape == "square"):
+        i = 0
+        for j in range(60):
+            point.right(2)
+            square(point, 20 + i)
+            i += 1 
+    if(shape == "star"):
+        i = 0
+        for j in range(60):
+            point.right(2)
+            star(point, 20 + i)
+            i += 1             
 class Adder(ttk.Frame):
     """The adders gui and functions."""
     def __init__(self, parent, *args, **kwargs):
         ttk.Frame.__init__(self, parent, *args, **kwargs)
         self.root = parent
         self.init_gui()
-
+        
     def on_quit(self):
         """Exits program."""
         quit()
@@ -47,19 +62,26 @@ class Adder(ttk.Frame):
             canvas.pack(fill=tk.BOTH, expand=tk.YES)
             screen = TurtleScreen(canvas)
             turtle = RawTurtle(screen)
-            point = turtle 
-            point.color("black")
-            if (self.shapeSelect.get() == "square"):
-                spiralDriver(square,(point))
-            if (self.shapeSelect.get() == "triangle"):
-                triangle(point, 20)      
-            if (self.shapeSelect.get() == "star"):
-                star(point, 20)                      
+            cWidth = 800
+            cHeight = 600
+            x = 300
+            y = 100
+            window.geometry('%dx%d+%d+%d' % (cWidth, cHeight, x, y))
+            driver(self.shapeSelect.get(), turtle)                    
     def init_gui(self):
         """Builds GUI."""
         self.root.title('Fractal Maker')
         self.grid(column=0, row=0, sticky='nsew')
-
+        
+        # get screen width and height
+        #screen_width = root.winfo_screenwidth()
+        #screen_height = root.winfo_screenheight()
+        rootWidth = 250
+        rootHeight = 150
+        x = 0
+        y = 0
+        root.geometry('%dx%d+%d+%d' % (rootWidth, rootHeight, x, y))        
+        self.root.geometry()
 
         ttk.Label(self, text='Shape').grid(column=0, row=2, sticky='w')
         self.shapeSelect = ttk.Combobox(self, values=["square", "triangle", "star"])
