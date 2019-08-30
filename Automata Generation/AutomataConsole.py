@@ -5,7 +5,7 @@ AutomataConsole.py
 Creates a simple GUI for summing two numbers.
 """
 
-import tkinter
+import tkinter as tk
 from tkinter import ttk
 import RuleObject as automata
 
@@ -67,6 +67,6 @@ class Adder(ttk.Frame):
             child.grid_configure(padx=5, pady=5)
 
 if __name__ == '__main__':
-    root = tkinter.Tk()
+    root = tk.Tk()
     Adder(root)
     root.mainloop()
