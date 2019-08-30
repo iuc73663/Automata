@@ -9,15 +9,26 @@ import tkinter as tk
 from tkinter import ttk
 from turtle import RawTurtle, TurtleScreen, ScrolledCanvas 
 
-def square(point,sidelength = 5):
+def square(point,sidelength = 50):
     for i in range(4):
         point.forward(sidelength)
         point.right(90)
-def triangle(point,sidelength = 5):
+def triangle(point,sidelength = 50):
     for i in range(3):
         point.forward(sidelength)
         point.right(120)        
-        
+
+def star(point, sidelength = 50):
+    for i in range(5):
+        point.forward(sidelength)
+        point.right(145)
+def spiralDriver(shape, point):
+    n = 0
+    for k in range(1,60):        
+        shape(point, n)
+        point.right(5)
+        n += 1       
+    
 class Adder(ttk.Frame):
     """The adders gui and functions."""
     def __init__(self, parent, *args, **kwargs):
@@ -39,9 +50,11 @@ class Adder(ttk.Frame):
             point = turtle 
             point.color("black")
             if (self.shapeSelect.get() == "square"):
-                square(point, 20)
+                spiralDriver(square,(point))
             if (self.shapeSelect.get() == "triangle"):
-                triangle(point, 20)                        
+                triangle(point, 20)      
+            if (self.shapeSelect.get() == "star"):
+                star(point, 20)                      
     def init_gui(self):
         """Builds GUI."""
         self.root.title('Fractal Maker')
@@ -49,7 +62,7 @@ class Adder(ttk.Frame):
 
 
         ttk.Label(self, text='Shape').grid(column=0, row=2, sticky='w')
-        self.shapeSelect = ttk.Combobox(self, values=["square", "triangle"])
+        self.shapeSelect = ttk.Combobox(self, values=["square", "triangle", "star"])
         self.shapeSelect.grid(column=1, row = 2)
         
         self.calc_button = ttk.Button(self, text='Calculate', command=self.calculate)
