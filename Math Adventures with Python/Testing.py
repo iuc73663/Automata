@@ -22,25 +22,25 @@ def star(point, sidelength = 50):
     for i in range(5):
         point.forward(sidelength)
         point.right(145)  
-def driver(shape, turt):
+def driver(shape, steps, turt):
     point = turt 
     point.color("black") 
     point.speed("fastest")
     if(shape == "triangle"):
         i = 0
-        for j in range(60):
+        for j in range(steps):
             point.right(2)
             triangle(point, 20 + i)
             i += 1 
     if(shape == "square"):
         i = 0
-        for j in range(60):
+        for j in range(steps):
             point.right(2)
             square(point, 20 + i)
             i += 1 
     if(shape == "star"):
         i = 0
-        for j in range(60):
+        for j in range(steps):
             point.right(2)
             star(point, 20 + i)
             i += 1             
@@ -67,7 +67,7 @@ class Adder(ttk.Frame):
             x = 300
             y = 100
             window.geometry('%dx%d+%d+%d' % (cWidth, cHeight, x, y))
-            driver(self.shapeSelect.get(), turtle)                    
+            driver(self.shapeSelect.get(), int(self.step_entry.get()), turtle)                    
     def init_gui(self):
         """Builds GUI."""
         self.root.title('Fractal Maker')
@@ -87,8 +87,12 @@ class Adder(ttk.Frame):
         self.shapeSelect = ttk.Combobox(self, values=["square", "triangle", "star"])
         self.shapeSelect.grid(column=1, row = 2)
         
+        ttk.Label(self, text='Depth').grid(column=0, row=3, sticky='w')
+        self.step_entry = ttk.Entry(self, width=6)
+        self.step_entry.grid(column=1, row = 3)
+        
         self.calc_button = ttk.Button(self, text='Calculate', command=self.calculate)
-        self.calc_button.grid(column=0, row=3, columnspan=4)
+        self.calc_button.grid(column=0, row=4, columnspan=4)
         
 
         ttk.Separator(self, orient='horizontal').grid(column=0, row=1, columnspan=4, sticky='ew')
