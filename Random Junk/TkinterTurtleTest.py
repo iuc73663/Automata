@@ -83,7 +83,7 @@ colors = ['orange','red','violet','purple','blue','black']
 shift = 0.0
 
 for i in range(100):
-    driver(1,'fastest',colors[i%len(colors)],12,shift,(i/100))
+    driver(0,'fastest',colors[i%len(colors)],12,shift,(i/100))
     shift += .1
 
 

@@ -56,7 +56,7 @@ class Adder(ttk.Frame):
         quit()
         
     def calculate(self):
-        if not(self.shapeSelect.get() == ""):
+        if not(self.shapeSelect.get() == "") and not(self.step_entry.get() == ""):
             window = tk.Tk()
             canvas = ScrolledCanvas(master=window, width=800, height=600)
             canvas.pack(fill=tk.BOTH, expand=tk.YES)

@@ -15,7 +15,7 @@ def square(sidelength=100):
 from turtle import *
 shape("turtle")
 
-speed("normal")
+speed("fastest")
 
 i = 0
 for j in range(360):
