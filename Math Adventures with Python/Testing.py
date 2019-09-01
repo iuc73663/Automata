@@ -106,12 +106,14 @@ class TurtleCanvas:
     canvas.pack(fill=tk.BOTH, expand=tk.YES)
     screen = TurtleScreen(canvas)
     turtle = RawTurtle(screen)
+    
     def __init__(self,  x, y):
         cWidth = 800
         cHeight = 600
         self.x = x
         self.y = y
         self.window.geometry('%dx%d+%d+%d' % (cWidth, cHeight, x, y))
+        self.canvas.bind('<MouseWheel>', self.zoom)
     def star(self):
         point = self.turtle 
         point.color("black") 
@@ -120,6 +122,9 @@ class TurtleCanvas:
             point.forward(50)
             point.right(145)  
         self.window.mainloop()
+    def zoom(self,event):
+        amount = 0.9 if event.delta < 0 else 1.1
+        self.canvas.scale(tk.ALL, 0, 0, amount, amount)
 #if __name__ == '__main__':
 #    root = tk.Tk()
 #    Adder(root)
