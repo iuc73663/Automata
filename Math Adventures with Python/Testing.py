@@ -100,9 +100,30 @@ class Adder(ttk.Frame):
         for child in self.winfo_children():
             child.grid_configure(padx=10, pady=10)
 
+class TurtleCanvas:
+    window = tk.Tk()
+    canvas = ScrolledCanvas(master=window, width=800, height=600)
+    canvas.pack(fill=tk.BOTH, expand=tk.YES)
+    screen = TurtleScreen(canvas)
+    turtle = RawTurtle(screen)
+    def __init__(self,  x, y):
+        cWidth = 800
+        cHeight = 600
+        self.x = x
+        self.y = y
+        self.window.geometry('%dx%d+%d+%d' % (cWidth, cHeight, x, y))
+    def star(self):
+        point = self.turtle 
+        point.color("black") 
+        point.speed("fastest")
+        for i in range(5):
+            point.forward(50)
+            point.right(145)  
+        self.window.mainloop()
+#if __name__ == '__main__':
+#    root = tk.Tk()
+#    Adder(root)
+#    root.mainloop()
 
-
-if __name__ == '__main__':
-    root = tk.Tk()
-    Adder(root)
-    root.mainloop()
+sample = TurtleCanvas(200,300)
+sample.star()
