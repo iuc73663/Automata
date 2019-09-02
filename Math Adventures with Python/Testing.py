@@ -9,19 +9,7 @@ import tkinter as tk
 from tkinter import ttk
 from turtle import RawTurtle, TurtleScreen, ScrolledCanvas 
 
-def square(point,sidelength = 50):
-    for i in range(4):
-        point.forward(sidelength)
-        point.right(90)
-def triangle(point,sidelength = 50):
-    for i in range(3):
-        point.forward(sidelength)
-        point.right(120)        
 
-def star(point, sidelength = 50):
-    for i in range(5):
-        point.forward(sidelength)
-        point.right(145)  
 def driver(shape, steps, turt):
     point = turt 
     point.color("black") 
@@ -114,21 +102,40 @@ class TurtleCanvas:
         self.y = y
         self.window.geometry('%dx%d+%d+%d' % (cWidth, cHeight, x, y))
         self.canvas.bind('<MouseWheel>', self.zoom)
-    def star(self):
+    def zoom(self,event):
+        amount = 0.9 if event.delta < 0 else 1.1
+        self.canvas.scale(tk.ALL, 0, 0, amount, amount)
+        
+    def square(self,sidelength = 50):
+        point = self.turtle 
+        point.color("black") 
+        point.speed("fastest")
+        for i in range(4):
+            point.forward(sidelength)
+            point.right(90)
+        self.window.mainloop()
+        
+    def triangle(self,sidelength = 50):
+        point = self.turtle 
+        point.color("black") 
+        point.speed("fastest")
+        for i in range(3):
+            point.forward(sidelength)
+            point.right(120)        
+        self.window.mainloop()
+        
+    def star(self,sidelength = 50):
         point = self.turtle 
         point.color("black") 
         point.speed("fastest")
         for i in range(5):
-            point.forward(50)
+            point.forward(sidelength)
             point.right(145)  
         self.window.mainloop()
-    def zoom(self,event):
-        amount = 0.9 if event.delta < 0 else 1.1
-        self.canvas.scale(tk.ALL, 0, 0, amount, amount)
 #if __name__ == '__main__':
 #    root = tk.Tk()
 #    Adder(root)
 #    root.mainloop()
 
 sample = TurtleCanvas(200,300)
-sample.star()
+sample.square()
