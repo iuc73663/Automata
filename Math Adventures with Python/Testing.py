@@ -8,30 +8,7 @@ Created on Mon Aug 26 16:32:46 2019
 import tkinter as tk
 from tkinter import ttk
 from turtle import RawTurtle, TurtleScreen, ScrolledCanvas 
-
-
-def driver(shape, steps, turt):
-    point = turt 
-    point.color("black") 
-    point.speed("fastest")
-    if(shape == "triangle"):
-        i = 0
-        for j in range(steps):
-            point.right(2)
-            triangle(point, 20 + i)
-            i += 1 
-    if(shape == "square"):
-        i = 0
-        for j in range(steps):
-            point.right(2)
-            square(point, 20 + i)
-            i += 1 
-    if(shape == "star"):
-        i = 0
-        for j in range(steps):
-            point.right(2)
-            star(point, 20 + i)
-            i += 1             
+        
 class Adder(ttk.Frame):
     """The adders gui and functions."""
     def __init__(self, parent, *args, **kwargs):
@@ -94,12 +71,12 @@ class TurtleCanvas:
     canvas.pack(fill=tk.BOTH, expand=tk.YES)
     screen = TurtleScreen(canvas)
     turtle = RawTurtle(screen)
-    
     def __init__(self,  x, y):
         cWidth = 800
         cHeight = 600
         self.x = x
         self.y = y
+        self.turtle.speed("fastest")
         self.window.geometry('%dx%d+%d+%d' % (cWidth, cHeight, x, y))
         self.canvas.bind('<MouseWheel>', self.zoom)
     def zoom(self,event):
@@ -107,14 +84,9 @@ class TurtleCanvas:
         self.canvas.scale(tk.ALL, 0, 0, amount, amount)
         
     def square(self,sidelength = 50):
-        point = self.turtle 
-        point.color("black") 
-        point.speed("fastest")
         for i in range(4):
-            point.forward(sidelength)
-            point.right(90)
-        self.window.mainloop()
-        
+            self.turtle.forward(sidelength)
+            self.turtle.right(90)
     def triangle(self,sidelength = 50):
         point = self.turtle 
         point.color("black") 
@@ -132,10 +104,18 @@ class TurtleCanvas:
             point.forward(sidelength)
             point.right(145)  
         self.window.mainloop()
+
+    def squareDriver(self,steps):
+        i = 0
+        for j in range(steps):
+            self.square(20 + i)
+            self.turtle.right(2)
+            i += 1 
 #if __name__ == '__main__':
 #    root = tk.Tk()
 #    Adder(root)
 #    root.mainloop()
 
 sample = TurtleCanvas(200,300)
-sample.square()
+sample.squareDriver(30)
+sample.window.mainloop()
