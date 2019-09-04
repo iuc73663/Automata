@@ -10,11 +10,11 @@ from tkinter import ttk
 from turtle import RawTurtle, TurtleScreen, ScrolledCanvas 
 
 
-class TurtleCanvas(tk.Tk):
+class TurtleCanvas():
     
 
-    def __init__(self, x, y):
-        self.window = tk.Tk
+    def __init__(self,master, x, y):
+        self.window = master
         self.canvas = ScrolledCanvas(master=self.window, width=800, height=600)
         self.canvas.pack(fill=tk.BOTH, expand=tk.YES)
         self.screen = TurtleScreen(self.canvas)
@@ -72,10 +72,10 @@ class Adder(ttk.Frame):
         
     def calculate(self):
         if not(self.shapeSelect.get() == "") and not(self.step_entry.get() == ""):
-            sample = TurtleCanvas(100,100)
+            self.newWindow = tk.Toplevel(self.master)
+            sample = TurtleCanvas(self.newWindow,100,100)
             sample.squareDriver(int(self.step_entry.get()))     
-            #sample.window.mainloop()  
-            print(5)
+        
     def init_gui(self):
         """Builds GUI."""
         self.root.title('Fractal Maker')
