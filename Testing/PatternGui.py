@@ -11,8 +11,6 @@ from turtle import RawTurtle, TurtleScreen, ScrolledCanvas
 
 
 class TurtleCanvas():
-    
-
     def __init__(self,master, x, y):
         self.window = master
         self.canvas = ScrolledCanvas(master=self.window, width=800, height=600)
@@ -73,6 +71,7 @@ class Adder(ttk.Frame):
     def calculate(self):
         if not(self.shapeSelect.get() == "") and not(self.step_entry.get() == ""):
             self.newWindow = tk.Toplevel(self.master)
+            #reference this amazing thread https://stackoverflow.com/questions/17466561/best-way-to-structure-a-tkinter-application
             sample = TurtleCanvas(self.newWindow,100,100)
             sample.squareDriver(int(self.step_entry.get()))     
         
