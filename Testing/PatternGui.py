@@ -38,13 +38,9 @@ class TurtleCanvas():
             self.turtle.right(120)        
         
     def star(self,sidelength = 50):
-        point = self.turtle 
-        point.color("black") 
-        point.speed("fastest")
         for i in range(5):
-            point.forward(sidelength)
-            point.right(145)  
-        self.window.mainloop()
+            self.turtle.forward(sidelength)
+            self.turtle.right(145)  
     def starDriver(self,steps):
         i = 0
         for j in range(steps):
