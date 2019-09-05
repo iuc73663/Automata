@@ -49,7 +49,18 @@ class TurtleCanvas():
             point.forward(sidelength)
             point.right(145)  
         self.window.mainloop()
-
+    def starDriver(self,steps):
+        i = 0
+        for j in range(steps):
+            self.star(20 + i)
+            self.turtle.right(2)
+            i += 1 
+    def triangleDriver(self,steps):
+        i = 0
+        for j in range(steps):
+            self.triangle(20 + i)
+            self.turtle.right(2)
+            i += 1             
     def squareDriver(self,steps):
         i = 0
         for j in range(steps):
@@ -73,8 +84,12 @@ class Adder(ttk.Frame):
             self.newWindow = tk.Toplevel(self.master)
             #reference this amazing thread https://stackoverflow.com/questions/17466561/best-way-to-structure-a-tkinter-application
             sample = TurtleCanvas(self.newWindow,100,100)
-            sample.squareDriver(int(self.step_entry.get()))     
-        
+            if(self.shapeSelect.get() == "square"):
+                sample.squareDriver(int(self.step_entry.get()))     
+            if(self.shapeSelect.get() == "triangle"):
+                sample.triangleeDriver(int(self.step_entry.get()))     
+            if(self.shapeSelect.get() == "star"):
+                sample.starDriver(int(self.step_entry.get()))                     
     def init_gui(self):
         """Builds GUI."""
         self.root.title('Fractal Maker')
