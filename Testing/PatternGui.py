@@ -24,6 +24,14 @@ class TurtleCanvas():
         self.turtle.speed("fastest")
         self.window.geometry('%dx%d+%d+%d' % (cWidth, cHeight, x, y))
         self.canvas.bind('<MouseWheel>', self.zoom)
+        self.canvas.bind("<ButtonPress-1>", self.scroll_start)
+        self.canvas.bind("<B1-Motion>", self.scroll_move)
+        
+    def scroll_start(self,event):
+        self.canvas.scan_mark(event.x, event.y)
+    
+    def scroll_move(self,event):
+        self.canvas.scan_dragto(event.x, event.y, gain=1)        
     def zoom(self,event):
         amount = 0.9 if event.delta < 0 else 1.1
         self.canvas.scale(tk.ALL, 0, 0, amount, amount)
@@ -75,7 +83,7 @@ class Adder(ttk.Frame):
         if not(self.shapeSelect.get() == "") and not(self.step_entry.get() == ""):
             self.newWindow = tk.Toplevel(self.master)
             #reference this amazing thread https://stackoverflow.com/questions/17466561/best-way-to-structure-a-tkinter-application
-            sample = TurtleCanvas(self.newWindow,100,100)
+            sample = TurtleCanvas(self.newWindow,5,5)
             if(self.shapeSelect.get() == "square"):
                 sample.squareDriver(int(self.step_entry.get()))     
             if(self.shapeSelect.get() == "triangle"):
