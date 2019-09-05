@@ -33,13 +33,9 @@ class TurtleCanvas():
             self.turtle.forward(sidelength)
             self.turtle.right(90)
     def triangle(self,sidelength = 50):
-        point = self.turtle 
-        point.color("black") 
-        point.speed("fastest")
         for i in range(3):
-            point.forward(sidelength)
-            point.right(120)        
-        self.window.mainloop()
+            self.turtle.forward(sidelength)
+            self.turtle.right(120)        
         
     def star(self,sidelength = 50):
         point = self.turtle 
@@ -87,7 +83,7 @@ class Adder(ttk.Frame):
             if(self.shapeSelect.get() == "square"):
                 sample.squareDriver(int(self.step_entry.get()))     
             if(self.shapeSelect.get() == "triangle"):
-                sample.triangleeDriver(int(self.step_entry.get()))     
+                sample.triangleDriver(int(self.step_entry.get()))     
             if(self.shapeSelect.get() == "star"):
                 sample.starDriver(int(self.step_entry.get()))                     
     def init_gui(self):
