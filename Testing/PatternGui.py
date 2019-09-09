@@ -52,22 +52,34 @@ class TurtleCanvas():
     def starDriver(self,steps):
         i = 0
         for j in range(steps):
-            self.star(20 + i)
+            self.star(1 + i)
             self.turtle.right(2)
             i += 1 
     def triangleDriver(self,steps):
         i = 0
         for j in range(steps):
-            self.triangle(20 + i)
+            self.triangle(1 + i)
             self.turtle.right(2)
-            i += 1             
+            i += 0.1             
     def squareDriver(self,steps):
         i = 0
         for j in range(steps):
-            self.square(20 + i)
+            self.square(1 + i)
             self.turtle.right(2)
             i += 1 
-           
+    def shapeDriver(self, shapeFunc, steps):
+        i = 0
+        for j in range(steps):
+            shapeFunc(1 + i)
+            self.turtle.right(2)
+            i += 1     
+    def helperDriver(self, shape, steps):
+        if(shape == "square"):
+            self.shapeDriver(self.square,steps)     
+        if(shape == "triangle"):
+            self.shapeDriver(self.triangle,steps)      
+        if(shape == "star"):
+            self.shapeDriver(self.star,steps)                     
 class Adder(ttk.Frame):
     """The adders gui and functions."""
     def __init__(self, parent, *args, **kwargs):
@@ -83,13 +95,8 @@ class Adder(ttk.Frame):
         if not(self.shapeSelect.get() == "") and not(self.step_entry.get() == ""):
             self.newWindow = tk.Toplevel(self.master)
             #reference this amazing thread https://stackoverflow.com/questions/17466561/best-way-to-structure-a-tkinter-application
-            sample = TurtleCanvas(self.newWindow,5,5)
-            if(self.shapeSelect.get() == "square"):
-                sample.squareDriver(int(self.step_entry.get()))     
-            if(self.shapeSelect.get() == "triangle"):
-                sample.triangleDriver(int(self.step_entry.get()))     
-            if(self.shapeSelect.get() == "star"):
-                sample.starDriver(int(self.step_entry.get()))                     
+            sample = TurtleCanvas(self.newWindow,100,250)
+            sample.helperDriver(self.shapeSelect.get(),int(self.step_entry.get()))                 
     def init_gui(self):
         """Builds GUI."""
         self.root.title('Fractal Maker')
