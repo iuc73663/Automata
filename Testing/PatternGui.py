@@ -75,17 +75,18 @@ class Adder(ttk.Frame):
         quit()
         
     def calculate(self):
-        if not(self.shapeSelect.get() == "") and not(self.step_entry.get() == ""):
+        if not(self.step_entry.get() == ""):
             self.newWindow = tk.Toplevel(self.master)
             #reference this amazing thread https://stackoverflow.com/questions/17466561/best-way-to-structure-a-tkinter-application
             sample = TurtleCanvas(self.newWindow,100,250)
+            sample.turtle.color(self.colorSelect.get())
             sample.helperDriver(self.shapeSelect.get(),int(self.step_entry.get()))                 
     def init_gui(self):
         """Builds GUI."""
         self.root.title('Fractal Maker')
         self.grid(column=0, row=0, sticky='nsew')
         rootWidth = 250
-        rootHeight = 150
+        rootHeight = 200
         x = 0
         y = 0
         root.geometry('%dx%d+%d+%d' % (rootWidth, rootHeight, x, y))        
@@ -95,14 +96,19 @@ class Adder(ttk.Frame):
         self.shapeSelect = ttk.Combobox(self, values=["square", "triangle", "star"])
         self.shapeSelect.current(0)
         self.shapeSelect.grid(column=1, row = 2)
+
+        ttk.Label(self, text='Color').grid(column=0, row=3, sticky='w')
+        self.colorSelect = ttk.Combobox(self, values=["black", "red", "purple", "blue", "Green", "Yellow", "Orange"])
+        self.colorSelect.current(0)
+        self.colorSelect.grid(column=1, row = 3)
         
-        ttk.Label(self, text='Depth').grid(column=0, row=3, sticky='w')
+        ttk.Label(self, text='Depth').grid(column=0, row=4, sticky='w')
         self.step_entry = ttk.Entry(self, width=6)
         self.step_entry.insert(0,"30")
-        self.step_entry.grid(column=1, row = 3)
+        self.step_entry.grid(column=1, row = 4)
         
         self.calc_button = ttk.Button(self, text='Calculate', command=self.calculate)
-        self.calc_button.grid(column=0, row=4, columnspan=4)
+        self.calc_button.grid(column=0, row=5, columnspan=4)
         
 
         ttk.Separator(self, orient='horizontal').grid(column=0, row=1, columnspan=4, sticky='ew')
