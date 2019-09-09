@@ -49,24 +49,7 @@ class TurtleCanvas():
         for i in range(5):
             self.turtle.forward(sidelength)
             self.turtle.right(145)  
-    def starDriver(self,steps):
-        i = 0
-        for j in range(steps):
-            self.star(1 + i)
-            self.turtle.right(2)
-            i += 1 
-    def triangleDriver(self,steps):
-        i = 0
-        for j in range(steps):
-            self.triangle(1 + i)
-            self.turtle.right(2)
-            i += 0.1             
-    def squareDriver(self,steps):
-        i = 0
-        for j in range(steps):
-            self.square(1 + i)
-            self.turtle.right(2)
-            i += 1 
+
     def shapeDriver(self, shapeFunc, steps):
         i = 0
         for j in range(steps):
@@ -110,10 +93,12 @@ class Adder(ttk.Frame):
 
         ttk.Label(self, text='Shape').grid(column=0, row=2, sticky='w')
         self.shapeSelect = ttk.Combobox(self, values=["square", "triangle", "star"])
+        self.shapeSelect.current(0)
         self.shapeSelect.grid(column=1, row = 2)
         
         ttk.Label(self, text='Depth').grid(column=0, row=3, sticky='w')
         self.step_entry = ttk.Entry(self, width=6)
+        self.step_entry.insert(0,"30")
         self.step_entry.grid(column=1, row = 3)
         
         self.calc_button = ttk.Button(self, text='Calculate', command=self.calculate)
