@@ -56,6 +56,7 @@ class TurtleCanvas():
             shapeFunc(1 + i)
             self.turtle.right(2)
             i += 1     
+        self.turtle.ht()
     def helperDriver(self, shape, steps):
         if(shape == "square"):
             self.shapeDriver(self.square,steps)     
@@ -83,7 +84,7 @@ class Adder(ttk.Frame):
             sample.helperDriver(self.shapeSelect.get(),int(self.step_entry.get()))                 
     def init_gui(self):
         """Builds GUI."""
-        self.root.title('Fractal Maker')
+        self.root.title('Goat Simulator')
         self.grid(column=0, row=0, sticky='nsew')
         rootWidth = 250
         rootHeight = 200
