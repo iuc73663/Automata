@@ -55,7 +55,7 @@ class TurtleCanvas():
         for j in range(steps):
             shapeFunc(1 + i)
             self.turtle.right(1)
-            i += 0.01     
+            i += 0.1     
         self.turtle.ht()
     def helperDriver(self, shape, steps):
         self.window.title(shape + " || Steps:" + str(steps))
