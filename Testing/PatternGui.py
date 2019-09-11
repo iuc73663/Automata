@@ -26,7 +26,7 @@ class TurtleCanvas():
         self.canvas.bind('<MouseWheel>', self.zoom)
         self.canvas.bind("<ButtonPress-1>", self.scroll_start)
         self.canvas.bind("<B1-Motion>", self.scroll_move)
-        
+                
     def scroll_start(self,event):
         self.canvas.scan_mark(event.x, event.y)
     
@@ -54,15 +54,16 @@ class TurtleCanvas():
         i = 0
         for j in range(steps):
             shapeFunc(1 + i)
-            self.turtle.right(2)
-            i += 1     
+            self.turtle.right(1)
+            i += 0.01     
         self.turtle.ht()
     def helperDriver(self, shape, steps):
-        if(shape == "square"):
+        self.window.title(shape + " || Steps:" + str(steps))
+        if(shape == "Square"):
             self.shapeDriver(self.square,steps)     
-        if(shape == "triangle"):
+        if(shape == "Triangle"):
             self.shapeDriver(self.triangle,steps)      
-        if(shape == "star"):
+        if(shape == "Star"):
             self.shapeDriver(self.star,steps)                     
 class Adder(ttk.Frame):
     """The adders gui and functions."""
@@ -94,12 +95,12 @@ class Adder(ttk.Frame):
         self.root.geometry()
 
         ttk.Label(self, text='Shape').grid(column=0, row=2, sticky='w')
-        self.shapeSelect = ttk.Combobox(self, values=["square", "triangle", "star"])
+        self.shapeSelect = ttk.Combobox(self, values=["Square", "Triangle", "Star"])
         self.shapeSelect.current(0)
         self.shapeSelect.grid(column=1, row = 2)
 
         ttk.Label(self, text='Color').grid(column=0, row=3, sticky='w')
-        self.colorSelect = ttk.Combobox(self, values=["black", "red", "purple", "blue", "Green", "Yellow", "Orange"])
+        self.colorSelect = ttk.Combobox(self, values=["Black", "Red", "Purple", "Blue", "Green", "Yellow", "Orange"])
         self.colorSelect.current(0)
         self.colorSelect.grid(column=1, row = 3)
         
