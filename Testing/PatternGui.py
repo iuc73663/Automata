@@ -12,6 +12,8 @@ from turtle import RawTurtle, TurtleScreen, ScrolledCanvas
 colors = ["Black", "Red", "Purple", "Blue", "Green", "Yellow", "Orange"]
 
 class TurtleCanvas():
+
+
     def __init__(self,master, x, y):
         self.window = master
         self.canvas = ScrolledCanvas(master=self.window, width=800, height=600)
@@ -27,7 +29,15 @@ class TurtleCanvas():
         self.canvas.bind('<MouseWheel>', self.zoom)
         self.canvas.bind("<ButtonPress-1>", self.scroll_start)
         self.canvas.bind("<B1-Motion>", self.scroll_move)
-        self.canvas.bind("<ButtonPress-3>", self.changeColor)
+        self.canvas.bind("<ButtonPress-3>", self.changeDirection)
+        self.window.bind("<c>", self.changeColor)
+        self.rightDirection = True
+    def changeDirection(self,event):
+        #print(self.rightDirection)
+        if(self.rightDirection):
+            self.rightDirection = False
+        else:
+            self.rightDirection = True
     def changeColor(self,event):
         currentColorIndex = colors.index(self.turtle.color()[0])
         if (currentColorIndex == (len(colors) - 1)):
@@ -61,7 +71,10 @@ class TurtleCanvas():
         i = 0
         for j in range(steps):
             shapeFunc(1 + i)
-            self.turtle.right(1)
+            if(self.rightDirection == True):
+                self.turtle.right(1)
+            else:
+                self.turtle.left(1)
             i += 0.1
         self.turtle.ht()
     def helperDriver(self, shape, steps):
