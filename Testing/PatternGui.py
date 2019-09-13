@@ -28,6 +28,7 @@ class TurtleCanvas():
         self.canvas.bind("<B1-Motion>", self.scroll_move)
         self.canvas.bind("<ButtonPress-3>", self.changeColor)
     def changeColor(self,event):
+        print("a")
         colors = ["Black", "Red", "Purple", "Blue", "Green", "Yellow", "Orange"]
         currentColorIndex = colors.index(self.turtle.color()[0])
         if (currentColorIndex == (len(colors) - 1)):
