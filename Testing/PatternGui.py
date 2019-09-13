@@ -29,8 +29,11 @@ class TurtleCanvas():
         self.canvas.bind("<ButtonPress-3>", self.changeColor)
     def changeColor(self,event):
         colors = ["Black", "Red", "Purple", "Blue", "Green", "Yellow", "Orange"]
-        """current = colors.index(turtle.)"""
-        self.turtle.color("green")
+        currentColorIndex = colors.index(self.turtle.color()[0])
+        if (currentColorIndex == (len(colors) - 1)):
+            self.turtle.color(colors[0])
+        else:
+            self.turtle.color(colors[currentColorIndex + 1])
     def scroll_start(self,event):
         self.canvas.scan_mark(event.x, event.y)
 
