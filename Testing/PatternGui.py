@@ -9,6 +9,7 @@ import tkinter as tk
 from tkinter import ttk
 from turtle import RawTurtle, TurtleScreen, ScrolledCanvas
 
+colors = ["Black", "Red", "Purple", "Blue", "Green", "Yellow", "Orange"]
 
 class TurtleCanvas():
     def __init__(self,master, x, y):
@@ -28,8 +29,6 @@ class TurtleCanvas():
         self.canvas.bind("<B1-Motion>", self.scroll_move)
         self.canvas.bind("<ButtonPress-3>", self.changeColor)
     def changeColor(self,event):
-        print("a")
-        colors = ["Black", "Red", "Purple", "Blue", "Green", "Yellow", "Orange"]
         currentColorIndex = colors.index(self.turtle.color()[0])
         if (currentColorIndex == (len(colors) - 1)):
             self.turtle.color(colors[0])
@@ -56,7 +55,7 @@ class TurtleCanvas():
     def star(self,sidelength = 50):
         for i in range(5):
             self.turtle.forward(sidelength)
-            self.turtle.right(145)
+            self.turtle.right(144)
 
     def shapeDriver(self, shapeFunc, steps):
         i = 0
@@ -108,7 +107,7 @@ class Adder(ttk.Frame):
         self.shapeSelect.grid(column=1, row = 2)
 
         ttk.Label(self, text='Color').grid(column=0, row=3, sticky='w')
-        self.colorSelect = ttk.Combobox(self, values=["Black", "Red", "Purple", "Blue", "Green", "Yellow", "Orange"])
+        self.colorSelect = ttk.Combobox(self, values = colors)
         self.colorSelect.current(0)
         self.colorSelect.grid(column=1, row = 3)
 
