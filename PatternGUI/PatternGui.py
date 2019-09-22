@@ -68,6 +68,7 @@ class TurtleCanvas():
             self.turtle.right(144)
 
     def shapeDriver(self, shapeFunc, steps):
+        self.turtle.st()
         i = 0
         for j in range(steps):
             shapeFunc(1 + i)
@@ -91,18 +92,18 @@ class Adder(ttk.Frame):
         ttk.Frame.__init__(self, parent, *args, **kwargs)
         self.root = parent
         self.init_gui()
-
+        self.newWindow = tk.Toplevel(self.master)
+        self.canvasObject = TurtleCanvas(self.newWindow,100,250)
     def on_quit(self):
         """Exits program."""
         quit()
 
     def calculate(self):
         if not(self.step_entry.get() == ""):
-            self.newWindow = tk.Toplevel(self.master)
-            #reference this amazing thread https://stackoverflow.com/questions/17466561/best-way-to-structure-a-tkinter-application
-            sample = TurtleCanvas(self.newWindow,100,250)
-            sample.turtle.color(self.colorSelect.get())
-            sample.helperDriver(self.shapeSelect.get(),int(self.step_entry.get()))
+            
+            #reference this amazing thread https://stackoverflow.com/questions/17466561/best-way-to-structure-a-tkinter-application            
+            self.canvasObject.turtle.color(self.colorSelect.get())
+            self.canvasObject.helperDriver(self.shapeSelect.get(),int(self.step_entry.get()))
     def init_gui(self):
         """Builds GUI."""
         self.root.title('Goat Simulator')
