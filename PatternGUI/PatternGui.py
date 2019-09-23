@@ -8,6 +8,7 @@ Created on Mon Aug 26 16:32:46 2019
 import tkinter as tk
 from tkinter import ttk
 from turtle import RawTurtle, TurtleScreen, ScrolledCanvas
+from win32api import GetSystemMetrics
 
 colors = ["Black", "Red", "Purple", "Blue", "Green", "Yellow", "Orange"]
 
@@ -20,7 +21,7 @@ class TurtleCanvas():
         self.canvas.pack(fill=tk.BOTH, expand=tk.YES)
         self.screen = TurtleScreen(self.canvas)
         self.turtle = RawTurtle(self.screen)
-        cWidth = 800
+        cWidth = 600
         cHeight = 600
         self.x = x
         self.y = y
@@ -92,15 +93,14 @@ class Adder(ttk.Frame):
         ttk.Frame.__init__(self, parent, *args, **kwargs)
         self.root = parent
         self.init_gui()
-        self.newWindow = tk.Toplevel(self.master)
-        self.canvasObject = TurtleCanvas(self.newWindow,100,250)
     def on_quit(self):
         """Exits program."""
         quit()
 
     def calculate(self):
         if not(self.step_entry.get() == ""):
-            
+            self.newWindow = tk.Toplevel(self.master)
+            self.canvasObject = TurtleCanvas(self.newWindow,100,250)            
             #reference this amazing thread https://stackoverflow.com/questions/17466561/best-way-to-structure-a-tkinter-application            
             self.canvasObject.turtle.color(self.colorSelect.get())
             self.canvasObject.helperDriver(self.shapeSelect.get(),int(self.step_entry.get()))
@@ -108,8 +108,8 @@ class Adder(ttk.Frame):
         """Builds GUI."""
         self.root.title('Goat Simulator')
         self.grid(column=0, row=0, sticky='nsew')
-        rootWidth = 250
-        rootHeight = 200
+        rootWidth = GetSystemMetrics(0)
+        rootHeight = GetSystemMetrics(1)
         x = 0
         y = 0
         root.geometry('%dx%d+%d+%d' % (rootWidth, rootHeight, x, y))
@@ -132,8 +132,13 @@ class Adder(ttk.Frame):
 
         self.calc_button = ttk.Button(self, text='Calculate', command=self.calculate)
         self.calc_button.grid(column=0, row=5, columnspan=4)
-
-
+        
+        self.testCanvas = ScrolledCanvas(master=self.root, width=800, height=600)
+        self.screen = TurtleScreen(self.testCanvas)
+        self.turtle = RawTurtle(self.screen)
+        self.testCanvas.grid(column=0,row=8,columnspan = 8)
+        
+        
         ttk.Separator(self, orient='horizontal').grid(column=0, row=1, columnspan=4, sticky='ew')
 
         for child in self.winfo_children():
@@ -143,6 +148,7 @@ class Adder(ttk.Frame):
 
 if __name__ == '__main__':
     root = tk.Tk()
+    #root.attributes("-fullscreen", True) #literal fullscreen
     Adder(root)
     root.mainloop()
 
