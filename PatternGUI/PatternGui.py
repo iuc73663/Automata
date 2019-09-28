@@ -26,7 +26,7 @@ class TurtleCanvas():
         self.canvas.bind("<ButtonPress-1>", self.scroll_start)
         self.canvas.bind("<B1-Motion>", self.scroll_move)
         self.canvas.bind("<ButtonPress-3>", self.changeDirection)
-        #self.window.bind("<c>", self.changeColor)
+        #self.canvas.bind("<c>", self.changeColor)
         self.rightDirection = True
     def changeDirection(self,event):
         #print(self.rightDirection)
@@ -74,8 +74,9 @@ class TurtleCanvas():
                 self.turtle.left(1)
             i += 0.1
         self.turtle.ht()
-    def helperDriver(self, shape, steps):
-        self.window.title(shape + " || Steps:" + str(steps))
+    def helperDriver(self, shape, steps, color):
+        print(color)
+        self.turtle.color(color)
         if(shape == "Square"):
             self.shapeDriver(self.square,steps)
         if(shape == "Triangle"):
@@ -99,7 +100,7 @@ class Adder(ttk.Frame):
             #reference this amazing thread https://stackoverflow.com/questions/17466561/best-way-to-structure-a-tkinter-application            
             #self.canvasObject.turtle.color(self.colorSelect.get())
             #self.canvasObject.helperDriver(self.shapeSelect.get(),int(self.step_entry.get()))
-            self.screen.helperDriver(self.shapeSelect.get(),int(self.step_entry.get()))
+            self.screen.helperDriver(self.shapeSelect.get(),int(self.step_entry.get()),self.colorSelect.get())
             print("poop")
     def init_gui(self):
         """Builds GUI."""
@@ -131,7 +132,7 @@ class Adder(ttk.Frame):
         self.calc_button.grid(column=0, row=5, columnspan=4)
         
         self.testCanvas = ScrolledCanvas(master=self.root, width=800, height=600)
-        self.screen = TurtleCanvas(self.testCanvas,100,250) 
+        self.screen = TurtleCanvas(self.testCanvas) 
         #self.turtle = RawTurtle(self.screen)
         self.testCanvas.grid(column=0,row=8,columnspan = 8)
         
