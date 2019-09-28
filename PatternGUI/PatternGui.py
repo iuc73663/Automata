@@ -13,22 +13,19 @@ from win32api import GetSystemMetrics
 colors = ["Black", "Red", "Purple", "Blue", "Green", "Yellow", "Orange"]
 
 class TurtleCanvas():
-    def __init__(self,canvas, x, y):
+    def __init__(self,canvas):
         #self.window = master
         #self.canvas = ScrolledCanvas(master=self.window, width=800, height=600)
         #self.canvas.pack(fill=tk.BOTH, expand=tk.YES)
+        self.canvas = canvas
         self.screen = TurtleScreen(canvas)
         self.turtle = RawTurtle(self.screen)
-        cWidth = 600
-        cHeight = 600
-        self.x = x
-        self.y = y
         self.turtle.speed("fastest")
         #self.window.geometry('%dx%d+%d+%d' % (cWidth, cHeight, x, y))
-        canvas.bind('<MouseWheel>', self.zoom)
-        canvas.bind("<ButtonPress-1>", self.scroll_start)
-        canvas.bind("<B1-Motion>", self.scroll_move)
-        canvas.bind("<ButtonPress-3>", self.changeDirection)
+        self.canvas.bind('<MouseWheel>', self.zoom)
+        self.canvas.bind("<ButtonPress-1>", self.scroll_start)
+        self.canvas.bind("<B1-Motion>", self.scroll_move)
+        self.canvas.bind("<ButtonPress-3>", self.changeDirection)
         #self.window.bind("<c>", self.changeColor)
         self.rightDirection = True
     def changeDirection(self,event):
@@ -102,7 +99,7 @@ class Adder(ttk.Frame):
             #reference this amazing thread https://stackoverflow.com/questions/17466561/best-way-to-structure-a-tkinter-application            
             #self.canvasObject.turtle.color(self.colorSelect.get())
             #self.canvasObject.helperDriver(self.shapeSelect.get(),int(self.step_entry.get()))
-            
+            self.screen.helperDriver(self.shapeSelect.get(),int(self.step_entry.get()))
             print("poop")
     def init_gui(self):
         """Builds GUI."""
